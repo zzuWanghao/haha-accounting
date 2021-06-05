@@ -1,6 +1,52 @@
 <template>
-<div>
-  Money.vue
+<div class="nav-wrapper">
+  <div class="content">
+     <p>aaa</p>
+    <p>aaa</p>
+
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p> <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+    <p>aaa</p>
+
+
+  </div>
+
 <Nav />
 </div>
 </template>
@@ -12,6 +58,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.nav-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 1px solid green ;
+
+  .content{
+    overflow: auto; //滚动条
+    flex-grow: 1;
+  }
+}
 
 </style>
