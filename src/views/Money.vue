@@ -1,54 +1,8 @@
 <template>
-<div class="nav-wrapper">
-  <div class="content">
-     <p>aaa</p>
-    <p>aaa</p>
 
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p> <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-    <p>aaa</p>
-
-
-  </div>
-
-<Nav />
-</div>
+  <Layout>
+    Money.vue
+  </Layout>
 </template>
 
 <script lang="ts">

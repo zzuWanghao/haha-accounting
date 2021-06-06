@@ -1,11 +1,7 @@
 <template>
-<div class="nav-wrapper">
-  <div class="content">
-    Labels.vue
-  </div>
-
-  <Nav></Nav>
-</div>
+  <Layout>
+    Label.vue
+  </Layout>
 </template>
 
 <script lang="ts">
