@@ -1,28 +1,40 @@
 <template>
+  <div>
 
-  <Layout>
-    Money.vue
-  </Layout>
+
+    <Layout class-prefix="layout">
+      <NumberPad/>
+      <Types/>
+      <Notes/>
+      <Tags/>
+    </Layout>
+  </div>
 </template>
 
 <script lang="ts">
+
+import Tags from '@/components/Money/Tags.vue'
+import NumberPad from '@/components/Money/NumberPad.vue';
+import Types from '@/components/Money/Types.vue';
+import Notes from '@/components/Money/Notes.vue';
+
 export default {
   name: 'Money',
+  components:{
+    Tags,
+    NumberPad,
+    Types,
+    Notes
+  }
 
 };
 </script>
 
-<style lang="scss" >
-.nav-wrapper{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  border: 1px solid green ;
+<style lang="scss">
 
-  .content{
-    overflow: auto; //滚动条
-    flex-grow: 1;
-  }
+.layout-content {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 </style>
