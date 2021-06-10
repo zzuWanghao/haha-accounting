@@ -1,29 +1,68 @@
 <template>
   <div class="numberPad">
-    <div class="output">100</div>
+    <div class="output">{{ outPut || '0' }}</div>
     <div class="buttons">
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>删除</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>清空</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
+      <button @click="inputContent">1</button>
+      <button @click="inputContent">2</button>
+      <button @click="inputContent">3</button>
+      <button @click="remove">删除</button>
+      <button @click="inputContent">4</button>
+      <button @click="inputContent">5</button>
+      <button @click="inputContent">6</button>
+      <button @click="clear">清空</button>
+      <button @click="inputContent">7</button>
+      <button @click="inputContent">8</button>
+      <button @click="inputContent">9</button>
       <button class="ok">OK</button>
-      <button class="zero">0</button>
-      <button>.</button>
+      <button @click="inputContent" class="zero">0</button>
+      <button @click="inputContent">.</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'NumberPad'
-  };
+
+
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component
+export default class NumberPad extends Vue{
+ outPut ='0';
+
+ inputContent(event :MouseEvent){
+
+   if (this.outPut.length===16){return;}
+   const input = (event.target as HTMLButtonElement).textContent!;
+   if(this.outPut==='0'){
+     if('1234567890'.indexOf(input)>=0){
+       this.outPut=input;
+       console.log(input);
+       return;
+     }
+   }
+   if(input==='.' && this.outPut.indexOf('.')>0){
+     return;
+   }
+   this.outPut=this.outPut+input
+ }
+ remove(){
+   if (this.outPut.length>1){
+
+     this.outPut= this.outPut.substring(0,this.outPut.length-1)
+   }else {
+     this.outPut='0';
+   }
+
+ }
+ clear(){
+   this.outPut='0';
+ }
+
+
+
+
+  }
 </script>
 
 <style lang="scss" scoped>
