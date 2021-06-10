@@ -18,6 +18,8 @@ a{
   text-decoration: none;
   color:inherit;
 }
+li{
+  margin:0; padding:0; list-style-type:none}
 //#app {
 //  font-family: Avenir, Helvetica, Arial, sans-serif;
 //  -webkit-font-smoothing: antialiased;

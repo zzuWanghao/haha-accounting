@@ -6,7 +6,7 @@
       <NumberPad/>
       <Types/>
       <Notes/>
-      <Tags/>
+      <Tags :data-source.sync="tags"/>
     </Layout>
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
     NumberPad,
     Types,
     Notes
+  },
+  data(){
+    return {
+      tags:['衣','食','住','行','吃','穿','玩','乐']
+    }
   }
 
 };
