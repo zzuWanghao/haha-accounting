@@ -10,50 +10,60 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 
 
 const GreetingProps = Vue.extend({
   props: {
     xxx: String
   }
-})
+});
 @Component
-export default class Types extends GreetingProps{
-  type='-'
-  selectType(type:string){
-          if(type==='-'|| type==='+'){
-            this.type=type
-          }
-        }
+export default class Types extends GreetingProps {
+  @Prop() readonly type!:string
+
+  selectType(type: string) {
+    if (type === '-' || type === '+') {
+      // this.type = type;
+      this.$emit('update:type',type)
+    }
+  }
+  // @Watch('type')
+  // onChangeType(newValue: string, oldValue: string){
+  //   this.$emit('update:value',newValue)
+  // }
 
 }
+
+
 
 </script>
 
 <style lang="scss" scoped>
-  .types {
-    background: #c4c4c4;
+.types {
+  background: #c4c4c4;
+  display: flex;
+  text-align: center;
+  font-size: 24px;
+
+  > li {
+    width: 50%;
+    height: 64px;
     display: flex;
-    text-align: center;
-    font-size: 24px;
-    > li {
-      width: 50%;
-      height: 64px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      &.selected::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: #333;
-      }
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &.selected::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #333;
     }
   }
+}
 
 </style>
