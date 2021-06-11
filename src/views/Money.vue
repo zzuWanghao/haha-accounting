@@ -1,9 +1,9 @@
 <template>
   <div>
 
-{{record}}
+{{recordList}}
     <Layout class-prefix="layout">
-      <NumberPad @update:value="onUpdateAmount"/>
+      <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
       <Types :type.sync="record.type" />
       <Notes @update:value="onUpdateNotes"/>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
@@ -25,7 +25,9 @@ type Record ={
   tags:string[],
   amount:number,
   type:string,
-  notes:string
+  notes:string,  //类型
+  createAt?:Date  //类
+
 }
 
 @Component({
@@ -33,7 +35,7 @@ type Record ={
         Tags,
         NumberPad,
         Types,
-        Notes
+        Notes,
       }
     }
 )
@@ -45,8 +47,9 @@ export default class Money extends Vue {
     tags:[],
     amount:0,
     type:'-',
-    notes:''
+    notes:'',
   }
+   recordList:Record[] = JSON.parse(localStorage.getItem('recordList')||'[]')
   onUpdateTags(value:string[]){
     this.record.tags=value
   }
@@ -55,6 +58,12 @@ export default class Money extends Vue {
   }
   onUpdateNotes(value:string){
     this.record.notes=value
+  }
+  saveRecord(){
+    const record2:Record =JSON.parse( JSON.stringify(this.record))  //深拷贝
+    record2.createAt = new Date()
+    this.recordList.push(record2)
+    window.localStorage.setItem('recordList',JSON.stringify(this.recordList))
   }
 
 
