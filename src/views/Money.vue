@@ -1,6 +1,5 @@
 <template>
   <div>
-
 {{recordList}}
     <Layout class-prefix="layout">
       <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
@@ -19,16 +18,13 @@ import Types from '@/components/Money/Types.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import recordListModel from '@/models/recordListModel';
+import tagListModel from '@/models/tagListModel';
 
+// const recordListModel =  require('@/recordListModel.ts').default
+console.log(recordListModel);
 
-type Record ={
-  tags:string[],
-  amount:number,
-  type:string,
-  notes:string,  //类型
-  createAt?:Date  //类
-
-}
+const tagList = tagListModel.fetch();
 
 @Component({
       components: {
@@ -41,15 +37,19 @@ type Record ={
 )
 export default class Money extends Vue {
 
-  tags= ['衣', '食', '住', '行', '吃', '穿', '玩', '乐']
+  tags= tagList
 
-  record:Record ={
+  // eslint-disable-next-line no-undef
+  record:RecordItem ={
     tags:[],
     amount:0,
     type:'-',
     notes:'',
   }
-   recordList:Record[] = JSON.parse(localStorage.getItem('recordList')||'[]')
+
+  // eslint-disable-next-line no-undef
+   recordList:RecordItem[] = recordListModel.fetch()
+
   onUpdateTags(value:string[]){
     this.record.tags=value
   }
@@ -60,10 +60,13 @@ export default class Money extends Vue {
     this.record.notes=value
   }
   saveRecord(){
-    const record2:Record =JSON.parse( JSON.stringify(this.record))  //深拷贝
+
+    // eslint-disable-next-line no-undef
+    const record2:RecordItem = JSON.parse( JSON.stringify(this.record))  //深拷贝
     record2.createAt = new Date()
     this.recordList.push(record2)
-    window.localStorage.setItem('recordList',JSON.stringify(this.recordList))
+    recordListModel.save(this.recordList)
+
   }
 
 
