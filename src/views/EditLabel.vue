@@ -1,15 +1,28 @@
 <template>
 <layout>
-  编辑标签
+  <div>
+    <Icon X="left" />
+    <span>
+      编辑标签
+    </span>
+  </div>
+  <Notes field-name="标签名" :placeholder="'请在这里输入'" />
+
 </layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
-@Component
+import Notes from '@/components/Money/Notes.vue';
+@Component(
+    {
+      components:{Notes}
+    }
+)
 export default class EditLabel extends Vue{
+
   created() {
     const id = this.$route.params.id
     tagListModel.fetch();
@@ -17,15 +30,18 @@ export default class EditLabel extends Vue{
     const tag = tags.filter(t=>t.id===id)[0]
     if (tag){
       console.log(tag);
-    }else {
+    }else{
       this.$router.replace('/404')
     }
-
   }
 }
 </script>
 
 <style lang="scss" scoped>
+svg{
 
+  width: 1em;
+  height: 1em;
+}
 
 </style>
