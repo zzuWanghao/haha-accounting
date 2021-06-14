@@ -6,7 +6,7 @@
              :value="value"
              @input="onChangeValue($event.target.value) "
 
-             :placeholder="this.placeholder">
+             :placeholder="placeholder">
     </label>
   </div>
 </template>
@@ -19,7 +19,6 @@ export  default  class Notes extends Vue{
   @Prop({default:''}) readonly value! :string
   @Prop({required:true}) fieldName!:string;
   @Prop() placeholder?:string;
-  @Watch('value')
   onChangeValue(newValue: string){
     this.$emit('update:value',newValue)
   }

@@ -63,13 +63,7 @@ export default class Money extends Vue {
     this.record.notes=value
   }
   saveRecord(){
-
-    // eslint-disable-next-line no-undef
-    const record2:RecordItem = JSON.parse( JSON.stringify(this.record))  //深拷贝
-    record2.createAt = new Date()
-    this.recordList.push(record2)
-    recordListModel.save(this.recordList)
-
+   recordListModel.create(this.record)
   }
 
 
