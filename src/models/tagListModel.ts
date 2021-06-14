@@ -10,6 +10,8 @@ type tagListModel={
     data : Tag[],
     fetch:()=>Tag[],
     create:(name:string)=> 'success'|'duplicated', //联合类型
+    update:(id:string,name:string)=>'success'|'duplicated' |'NotFound',
+    remove:(id:string)=> boolean
     save : ()=> void
 
 }
@@ -29,6 +31,35 @@ const tagListModel:tagListModel={
             this.save()
             return 'success'
         }
+    },
+    update(id,name){
+       const tag = this.data.filter(item=>item.id===id)[0]
+        if(tag && tag.name!==name){
+            tag.name= name;
+
+            this.save()
+            return 'success'
+        }else if(tag.name===name){
+            return 'duplicated'
+        }else
+        {
+            return 'NotFound'
+        }
+
+    },
+    remove(id:string){
+        let index=-1
+        for (let i = 0 ;i<=this.data.length;i++){
+            if(this.data[i].id===id){
+                index=i;
+                break;
+            }
+        }
+
+        console.log(index);
+        this.data.splice(index,1)
+        this.save()
+        return true
     },
     save(){
 
