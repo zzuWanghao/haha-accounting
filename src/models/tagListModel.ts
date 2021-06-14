@@ -1,4 +1,5 @@
 import stringMatching = jasmine.stringMatching;
+import createId from '@/lib/idCreator';
 
 const localStorageKeyName ='tagList'
 type Tag ={
@@ -26,8 +27,11 @@ const tagListModel:tagListModel={
         const names = this.data.map(item=>item.name)
         if(names.indexOf(name)>=0){
             return 'duplicated'
-        }else{
-            this.data.push({id:name,name:name})
+        }
+        else
+        {
+            const id = createId().toString()
+            this.data.push({id,name:name})
             this.save()
             return 'success'
         }
