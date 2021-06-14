@@ -5,7 +5,7 @@
 
     </div>
     <div class="createTag">
-      <button @click="createTag">新建标签</button>
+      <Button class="button" @click.native="createTag">新建标签</Button>
     </div>
   </Layout>
 </template>
@@ -14,8 +14,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
-
-@Component
+import Button from '@/components/Button.vue';
+@Component({
+  components: {Button}
+})
 export default class Labels extends Vue{
 
   tags = tagListModel.data
@@ -58,14 +60,6 @@ export default class Labels extends Vue{
 .createTag{
 text-align: center;
   margin-top: 44px;
-  button{
-    min-width: 88px;
-    min-height: 40px;
-    background: #767676;
-    border-radius: 4px;
-    color: #fff;
-
-  }
 }
 
 
