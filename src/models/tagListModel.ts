@@ -2,20 +2,7 @@ import stringMatching = jasmine.stringMatching;
 import createId from '@/lib/idCreator';
 
 const localStorageKeyName ='tagList'
-type Tag ={
-    id:string,
-    name:string
-}
 
-type tagListModel={
-    data : Tag[],
-    fetch:()=>Tag[],
-    create:(name:string)=> 'success'|'duplicated', //联合类型
-    update:(id:string,name:string)=>'success'|'duplicated' |'NotFound',
-    remove:(id:string)=> boolean
-    save : ()=> void
-
-}
 const tagListModel:tagListModel={
     data:[],
 

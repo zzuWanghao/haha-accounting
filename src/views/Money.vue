@@ -27,7 +27,7 @@ import tagListModel from '@/models/tagListModel';
 // const recordListModel =  require('@/recordListModel.ts').default
 console.log(recordListModel);
 
-const tagList = tagListModel.fetch();
+
 
 @Component({
       components: {
@@ -40,7 +40,7 @@ const tagList = tagListModel.fetch();
 )
 export default class Money extends Vue {
 
-  tags= tagList
+  tags= window.tagList
 
   // eslint-disable-next-line no-undef
   record:RecordItem ={
