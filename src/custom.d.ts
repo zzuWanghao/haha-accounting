@@ -21,11 +21,12 @@ type tagListModel={
 
 }
 interface Window {
-    tagList:Tag[],
-    createTag:(name:string)=>void,
-    removeTag:(id:string)=>boolean
-    updateTag:tagListModel['update']       //类型完全一样(id:string,name:string)=>'success'|'duplicated' |'NotFound'
-    findTag : (id:string)=>Tag|undefined
+    tagList: Tag[],
+    createTag: (name: string) => void,
+    removeTag: (id: string) => boolean
+    updateTag: tagListModel['update']       //类型完全一样(id:string,name:string)=>'success'|'duplicated' |'NotFound'
+    findTag: (id: string) => Tag | undefined
+    recordList: RecordItem[]
+    createRecord: (record: RecordItem) => void
+
 }
-
-
