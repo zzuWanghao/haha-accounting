@@ -22,7 +22,7 @@ import FormItem from '@/components/Money/FormItem.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import recordListModel from '@/models/recordListModel';
-import tagListModel from '@/models/tagListModel';
+
 
 // const recordListModel =  require('@/recordListModel.ts').default
 console.log(recordListModel);
