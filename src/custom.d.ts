@@ -4,7 +4,7 @@ type RecordItem ={
     amount:number,
     type:string,
     notes:string,  //类型
-    createAt?:Date  //类
+    createdAt?:Date  //类
 }
 type Tag ={
     id:string,
