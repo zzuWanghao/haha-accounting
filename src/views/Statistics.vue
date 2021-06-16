@@ -4,7 +4,7 @@
     <Tabs class-prefix="interval" :data-source="intervalList" :type.sync="interval"/>
       <ol>
         <li v-for="(group,index) in result" :key="index">
-         <h3 class="title">{{index}}</h3>
+         <h3 class="title">{{beautify(index)}}</h3>
           <ol>
             <li  class="record" v-for="item in group" :key="item.id">
               <span>{{tagString(item.tags)}}</span>
@@ -24,6 +24,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import intervalList from '@/constans/intervalList';
 import typeList from '@/constans/typeList';
+import dayjs from 'dayjs';
 @Component({
   components:{Tabs},
 })
@@ -45,6 +46,25 @@ export default class Statistics extends Vue{
     }
     console.log(hashTable);
     return hashTable
+  }
+
+  beautify(string: string) {
+
+    const day = dayjs(string);
+    const now = dayjs();
+
+
+    if (day.isSame(now, 'day')) {
+      return '今天';
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+      return '昨天';
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天';
+    } else if (day.isSame(now, 'year')) {
+      return day.format('M月D日');
+    } else {
+      return day.format('YYYY年M月D日');
+    }
   }
 
   // eslint-disable-next-line no-undef
