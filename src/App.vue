@@ -6,8 +6,9 @@
 
 
 
-
 <style lang="scss">
+@import "./assets/styles/reset.scss";
+
 *{margin: 0;padding: 0;
 box-sizing: border-box
 }
@@ -41,4 +42,5 @@ li{
     }
   }
 }
+
 </style>

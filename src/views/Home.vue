@@ -7,7 +7,7 @@
 
 <style lang="scss" >
 
-@import "../assets/styles/test.scss";
+@import "../assets/styles/reset";
 
 body{
   background-color: $color;
