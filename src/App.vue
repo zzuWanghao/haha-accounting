@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div id="app">
     <router-view />
   </div>
 </template>
@@ -42,5 +42,8 @@ li{
     }
   }
 }
-
+#app{
+max-width: 500px;
+  margin: 0 auto;
+}
 </style>
