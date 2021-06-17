@@ -18,7 +18,9 @@ module.exports = {
     config.module.rule('svg').exclude.add(dir) //其他svg loader 排除icons目录
 
 
-  }
-
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+      ? '/haha-accounting-website/'
+      : '/'
 
 }
