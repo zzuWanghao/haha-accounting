@@ -5,7 +5,7 @@ type RootState = {
     currentTag?: Tag
 }
 type RecordItem ={
-    tags:string[],
+    tags:Tag[],
     amount:number,
     type:string,
     notes:string,  //类型

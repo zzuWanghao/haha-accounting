@@ -54,7 +54,8 @@ export default class Money extends Vue {
    return  this.$store.state.recordList
   }
 
-  onUpdateTags(value:string[]){
+
+  onUpdateTags(value:Tag[]){
     this.record.tags=value
   }
   onUpdateAmount(value:string){

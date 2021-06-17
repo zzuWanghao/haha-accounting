@@ -15,15 +15,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import store from '@/store/index2';
 
 @Component
 export default class Tags extends Vue {
   tagList = store.fetchTags()
-  selectTags: string[] = [];
 
-  toggle(tag: string) {
+  selectTags: Tag[] = [];
+
+  toggle(tag: Tag) {
     const index = this.selectTags.indexOf(tag);
     if (index >= 0) {
       this.selectTags.splice(index, 1);
