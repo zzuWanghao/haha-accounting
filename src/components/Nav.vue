@@ -15,12 +15,6 @@
 
 <script lang="ts">
 
-// import L from  '@/assets/icons/labels.svg'
-// import M from  '@/assets/icons/money.svg'
-//
-// console.log(L);
-// console.log(M);
-
 export default {
 
   name: 'Nav',

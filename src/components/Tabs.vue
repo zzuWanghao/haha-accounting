@@ -19,7 +19,6 @@ export default class Tabs extends Vue {
   @Prop()classPrefix?:string;
 
   selectType(type: string) {
-    console.log(type);
     this.$emit('update:type',type)
 
   }

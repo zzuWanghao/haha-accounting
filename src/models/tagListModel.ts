@@ -1,4 +1,4 @@
-import stringMatching = jasmine.stringMatching;
+
 import createId from '@/lib/idCreator';
 
 const localStorageKeyName ='tagList'
@@ -47,7 +47,6 @@ const tagListModel:tagListModel={
             }
         }
 
-        console.log(index);
         this.data.splice(index,1)
         this.save()
         return true

@@ -1,8 +1,8 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="typeList" :type.sync="type"/>
-    <Tabs class-prefix="interval" :data-source="intervalList" :type.sync="interval"/>
-      <ol>
+<!--    <Tabs class-prefix="interval" :data-source="intervalList" :type.sync="interval"/>-->
+      <ol v-if="result.length>0">
         <li v-for="(group,index) in result" :key="index">
          <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
           <ol>
@@ -14,6 +14,11 @@
           </ol>
         </li>
       </ol>
+    <div v-else class="no-result">
+
+      <span>还没有相关记录哦</span>
+
+    </div>
   </Layout>
 
 </template>
@@ -38,12 +43,12 @@ export default class Statistics extends Vue{
   get result(){
 
     const {recordList} = this;
-    if (recordList.length === 0) {return [];}
+
 
     const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-
+    if (newList.length === 0) {return [];}
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
 
@@ -59,8 +64,6 @@ export default class Statistics extends Vue{
     }
     result.map(group => {
       group.total = group.items.reduce((sum, item) => {
-        // console.log(sum);
-        // console.log(item);
         return sum + item.amount;
       }, 0);
     });
@@ -70,12 +73,8 @@ export default class Statistics extends Vue{
 
 
   beautify(string: string) {
-    console.log(string);
     const day = dayjs(string);
-
     const now = dayjs();
-    console.log(666);
-    console.log(now);
 
     if (day.isSame(now, 'day')) {
       return '今天';
@@ -109,6 +108,10 @@ export default class Statistics extends Vue{
 
 
 <style lang="scss" scoped>
+.no-result{
+  padding: 20px;
+  text-align: center;
+}
 ::v-deep >.tabs{
   .type-tabs-item{
     background: white;

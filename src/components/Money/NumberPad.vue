@@ -65,6 +65,7 @@ ok(){
   this.$emit('update:value',number)
     this.$emit('submit',number)
     this.outPut='0'
+
 }
 
 

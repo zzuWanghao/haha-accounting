@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
-// import oldStore from '@/store/index2.ts'
+
 @Component(
     {
       components:{Button, FormItem},
@@ -46,7 +46,6 @@ export default class EditLabel extends Vue{
   }
 
   updateTag(name:string){
-     console.log(name)
     if(this.tag){
       this.$store.commit('updateTag',{id:this.tag.id,name})
     }
