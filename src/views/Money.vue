@@ -7,8 +7,15 @@
       <tabs :data-source="recordTypeList"
           :type.sync="record.type" />
 
-      <div class="notes">
+      <div class="createdAt">
+        <FormItem field-name="日期"
+                  type="date"
+                  placeholder="在这里输入日期"
+                  :value.sync="record.createdAt"
+        />
+      </div>
 
+      <div class="notes">
         <FormItem :value.sync="record.notes"  :field-name="'备注'" :placeholder="'请在此输入'"/>
       </div>
 
@@ -46,6 +53,7 @@ export default class Money extends Vue {
     amount:0,
     type:'-',
     notes:'',
+    createdAt:new Date().toISOString()
   }
   created() {
     this.$store.commit('fetchRecords');
