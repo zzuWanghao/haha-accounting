@@ -23,7 +23,7 @@ export default new Vuex.Store({
     },
     createRecord(state,record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createdAt = new Date().toISOString();
+      record2.createdAt = record2.createdAt || new Date().toISOString();
       store.state.recordList && store.state.recordList.push(record2);
      store.commit( 'saveRecords')
     },
