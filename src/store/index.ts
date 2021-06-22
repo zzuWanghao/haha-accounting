@@ -42,13 +42,15 @@ export default new Vuex.Store({
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
      if (!state.tagList|| state.tagList.length===0){
-       store.commit('createTag','衣')
-       store.commit('createTag','食')
-       store.commit('createTag','住')
-       store.commit('createTag','行')
+       store.commit('createTag',{name:'购物',img:'clothes'})
+       store.commit('createTag',{name:'餐饮',img:'eat'})
+       store.commit('createTag',{name:'房租',img:'house'})
+       store.commit('createTag',{name:'交通',img:'bus'})
+       store.commit('createTag',{name:'工资',img:'wages'})
+       store.commit('createTag',{name:'理财',img:'fiscal'})
      }
     },
-    createTag(state,name: string) {
+    createTag(state,{name,img}) {
       state.createError=null
       const names = state.tagList.map(item => item.name);
       if (names.indexOf(name) >= 0) {
@@ -56,7 +58,7 @@ export default new Vuex.Store({
         return;
       }
       const id = createId().toString();
-      state.tagList.push({id, name: name});
+      state.tagList.push({id, name, img});
       store.commit('saveTags');
 
 

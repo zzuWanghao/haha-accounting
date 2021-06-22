@@ -14,7 +14,8 @@ type RecordItem ={
 }
 type Tag ={
     id:string,
-    name:string
+    name:string,
+    img:string
 }
 
 type tagListModel={

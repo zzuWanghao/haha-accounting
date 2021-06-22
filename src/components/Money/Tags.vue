@@ -4,10 +4,23 @@
       <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li @click="toggle(tag.name)" :class="{selected:selectTags.indexOf(tag.name)>=0 }" v-for="tag in tagList" :key="tag.id">
-        {{ tag.name }}
-      </li>
 
+      <li @click="toggle(tag.name)" :class="{selected:selectTags.indexOf(tag.name)>=0 }" v-for="tag in tagList" :key="tag.id">
+
+        <div class="comb">
+          <div class="img">
+            <svg>
+              <use v-bind:xlink:href="'#'+tag.img" />
+            </svg>
+          </div>
+          <div>
+            {{tag.name}}
+          </div>
+
+
+        </div>
+
+      </li>
     </ul>
   </div>
 
@@ -50,7 +63,9 @@ export default class Tags extends mixins(TagHelper) {
 
 <style lang="scss" scoped>
 .tags {
-  font-size: 14px;
+  max-height: 360px;
+  overflow: scroll;
+  font-size: 12px;
   padding: 16px;
   flex-grow: 1;
   display: flex;
@@ -61,18 +76,42 @@ export default class Tags extends mixins(TagHelper) {
     flex-wrap: wrap;
 
     > li {
-      background: #d9d9d9;
+      //background: #d9d9d9;
       $h: 24px;
-      height: $h;
-      line-height: $h;
+      //height: $h;
+      //line-height: $h;
       border-radius: $h/2;
-      padding: 0 16px;
+      padding: 0 12px;
       margin-right: 12px;
       margin-top: 4px;
 
       &.selected {
-        background: darken(#d9d9d9, 50%);
-        color: #fff;
+        .comb{
+          .img{
+            background: darken(#d9d9d9, 20%);
+          }
+        }
+      }
+      .comb{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        .img{
+          display: flex;
+          width: 48px;
+          height: 48px;
+          border: 1px solid #eeeeee;
+          border-radius: 50%;
+          justify-content: center;
+          align-items: center;
+          background: #eeeeee;
+        }
+      }
+      svg{
+        width: 3em;
+        height: 3em;
       }
     }
   }
