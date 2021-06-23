@@ -63,7 +63,7 @@ export default class Tags extends mixins(TagHelper) {
 
 <style lang="scss" scoped>
 .tags {
-  max-height: 360px;
+  min-height: 200px;
   overflow: scroll;
   font-size: 12px;
   padding: 16px;

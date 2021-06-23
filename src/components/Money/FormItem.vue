@@ -9,12 +9,20 @@
                @input="onChangeValue($event.target.value)"
                :placeholder="this.placeholder">
       </template>
+      <template v-else-if="type==='month'">
+        <input :type="type"
+               :value="format1(value)"
+               @input="onChangeValue($event.target.value)"
+               :placeholder="this.placeholder">
+      </template>
+
       <template v-else>
         <input :type="type || 'text'"
                :value="value"
                @input="onChangeValue($event.target.value)"
                :placeholder="this.placeholder">
       </template>
+
 
     </label>
   </div>
@@ -38,6 +46,11 @@ export  default  class Notes extends Vue{
   format(isoString: string) {
     return dayjs(isoString).format('YYYY-MM-DD');
   }
+
+  format1(isoString: string) {
+    return dayjs(isoString).format('YYYY-MM');
+  }
+
 }
 
   // export default {

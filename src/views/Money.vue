@@ -1,10 +1,13 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
-<!--      <Types :type.sync="record.type" />-->
+      <tabs :data-source="recordTypeList"
+            :type.sync="record.type" />
+      <Tags  @update:value="onUpdateTags"/>
 
-
+      <div class="notes">
+        <FormItem :value.sync="record.notes"  :field-name="'备注'" :placeholder="'写点什么吧'"/>
+      </div>
 
       <div class="createdAt">
         <FormItem field-name="日期"
@@ -14,14 +17,8 @@
         />
       </div>
 
-      <div class="notes">
-        <FormItem :value.sync="record.notes"  :field-name="'备注'" :placeholder="'请在此输入'"/>
-      </div>
-
-      <Tags  @update:value="onUpdateTags"/>
-
-      <tabs :data-source="recordTypeList"
-            :type.sync="record.type" />
+      <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
+<!--      <Types :type.sync="record.type" />-->
     </Layout>
   </div>
 </template>
@@ -90,10 +87,13 @@ export default class Money extends Vue {
 </script>
 
 <style lang="scss">
+.createdAt{
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
 
+}
 .layout-content {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 .notes{
   padding: 6px 0;

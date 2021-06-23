@@ -2,12 +2,23 @@
   <Layout>
     <Tabs class-prefix="type" :data-source="typeList" :type.sync="type"/>
 
+    <div class="createdAt">
+      <FormItem field-name="日期"
+                type="month"
+                placeholder="在这里输入日期"
+                :value.sync="createdAt"
+      />
+    </div>
+
     <div class="chart-wrapper" ref="chartWrapper">
       <Chart class="chart" :options="chartOptions"/>
     </div>
 
 <!--    <Tabs class-prefix="interval" :data-source="intervalList" :type.sync="interval"/>-->
       <ol v-if="groupedList.length>0">
+        <div class="total">
+          <h2><span>总计:{{this.cost}}</span></h2>
+        </div>
         <li v-for="(group,index) in groupedList" :key="index">
          <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
           <ol>
@@ -34,6 +45,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import intervalList from '@/constans/intervalList';
 import typeList from '@/constans/typeList';
+import FormItem from '@/components/Money/FormItem.vue';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
 
@@ -42,10 +54,11 @@ import _ from 'lodash';
 import day from 'dayjs';
 
 @Component({
-  components: {Tabs, Chart},
+  components: {Tabs, Chart,FormItem},
 })
 export default class Statistics extends Vue{
 
+  createdAt=dayjs().format('YYYY-MM')
  get recordList(){
    // eslint-disable-next-line no-undef
    return  (this.$store.state as RootState).recordList
@@ -56,7 +69,7 @@ export default class Statistics extends Vue{
 
 
     const newList = clone(recordList)
-        .filter(r => r.type === this.type)
+        .filter(r => r.type === this.type&&dayjs(this.createdAt).isSame(dayjs(r.createdAt), 'month'))
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
     if (newList.length === 0) {return [];}
     type Result = { title: string, total?: number, items: RecordItem[] }[]
@@ -77,6 +90,9 @@ export default class Statistics extends Vue{
         return sum + item.amount;
       }, 0);
     });
+    this.cost = result.reduce((cost,t)=>{
+      return cost + t.total
+    },0)
     return result;
 
   }
@@ -108,9 +124,9 @@ export default class Statistics extends Vue{
 
   mounted() {
     const div = (this.$refs.chartWrapper as HTMLDivElement);
-    div.scrollLeft = div.scrollWidth;
+    //div.scrollLeft = div.scrollWidth;
   }
-
+  cost=0
   type='-'
   interval ='day'
   typeList = typeList
@@ -121,17 +137,32 @@ export default class Statistics extends Vue{
     const today = new Date();
     const array = [];
     console.log(this.groupedList);
-    for (let i = 0; i <= 29; i++) {
-      // this.recordList = [{date:7.3, value:100}, {date:7.2, value:200}]
-      const dateString = day(today)
-          .subtract(i, 'day').format('YYYY-MM-DD');
+    // for (let i = 0; i <= 29; i++) {
+    //   // this.recordList = [{date:7.3, value:100}, {date:7.2, value:200}]
+    //   const dateString = day(today)
+    //       .subtract(i, 'day').format('YYYY-MM-DD');
+    //   const found = _.find(this.groupedList, {
+    //     title: dateString
+    //   });
+    //   array.push({
+    //     key: dateString, value: found ? found.total : 0
+    //   });
+    // }
+
+
+    let dateString = dayjs(this.createdAt).startOf('month').format('YYYY-MM-DD');
+    for (let i = 1 ;i<=dayjs(this.createdAt).daysInMonth();i++){
       const found = _.find(this.groupedList, {
         title: dateString
       });
       array.push({
         key: dateString, value: found ? found.total : 0
       });
+      dateString =  dayjs(dateString).add(1, 'day').format('YYYY-MM-DD');
+
     }
+
+
     array.sort((a, b) => {
       if (a.key > b.key) {
         return 1;
@@ -153,8 +184,10 @@ export default class Statistics extends Vue{
     console.log(values);
     return {
       grid: {
-        left: 0,
-        right: 0,
+        top:50,
+        left: 10,
+        right: 10,
+        bottom:50
       },
       xAxis: {
         type: 'category',
@@ -173,7 +206,7 @@ export default class Statistics extends Vue{
       },
       series: [{
         symbol: 'circle',
-        symbolSize: 12,
+        symbolSize: 10,
         itemStyle: {borderWidth: 1, color: '#666', borderColor: '#666'},
         // lineStyle: {width: 10},
         data: values,
@@ -193,6 +226,11 @@ export default class Statistics extends Vue{
 
 
 <style lang="scss" scoped>
+.total{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
 .echarts {
   max-width: 100%;
   height: 400px;
@@ -241,7 +279,7 @@ export default class Statistics extends Vue{
 }
 
 .chart {
-  width: 430%;
+  width: 200%;
   &-wrapper {
     overflow: auto;
     &::-webkit-scrollbar {
